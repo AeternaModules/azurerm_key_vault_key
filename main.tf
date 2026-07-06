@@ -11,6 +11,14 @@ resource "azurerm_key_vault_key" "key_vault_keys" {
   not_before_date = each.value.not_before_date
   tags            = each.value.tags
 
+  dynamic "release_policy" {
+    for_each = each.value.release_policy != null ? [each.value.release_policy] : []
+    content {
+      immutable = release_policy.value.immutable
+      json      = release_policy.value.json
+    }
+  }
+
   dynamic "rotation_policy" {
     for_each = each.value.rotation_policy != null ? [each.value.rotation_policy] : []
     content {
