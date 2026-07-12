@@ -1,3 +1,7 @@
+output "key_vault_keys_id" {
+  description = "Map of id values across all key_vault_keys, keyed the same as var.key_vault_keys"
+  value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => v.id }
+}
 output "key_vault_keys_curve" {
   description = "Map of curve values across all key_vault_keys, keyed the same as var.key_vault_keys"
   value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => v.curve }
