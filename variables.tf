@@ -34,7 +34,7 @@ EOT
     not_before_date = optional(string)
     tags            = optional(map(string))
     release_policy = optional(object({
-      immutable = optional(bool) # Default: false
+      immutable = optional(bool)
       json      = string
     }))
     rotation_policy = optional(object({
@@ -58,6 +58,10 @@ EOT
   #   source:    [from keyvault.ValidateNestedItemName: invalid when len(value) > 127]
   # path: name
   #   source:    [from keyvault.ValidateNestedItemName] !regexp.MustCompile(`^[0-9a-zA-Z-]+$`).MatchString(v.(string))
+  # path: key_vault_id
+  #   source:    [from validationFunctionForResourceID] !ok
+  # path: key_vault_id
+  #   source:    [from validationFunctionForResourceID] err != nil
   # path: key_type
   #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
   # path: key_opts[*]
