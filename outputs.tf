@@ -52,7 +52,7 @@ output "key_vault_keys_public_key_pem" {
 }
 output "key_vault_keys_release_policy" {
   description = "Map of release_policy values across all key_vault_keys, keyed the same as var.key_vault_keys"
-  value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => v.release_policy if v.release_policy != null && length(v.release_policy) > 0 }
+  value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => one(v.release_policy) if v.release_policy != null && length(v.release_policy) > 0 }
 }
 output "key_vault_keys_resource_id" {
   description = "Map of resource_id values across all key_vault_keys, keyed the same as var.key_vault_keys"
@@ -64,7 +64,7 @@ output "key_vault_keys_resource_versionless_id" {
 }
 output "key_vault_keys_rotation_policy" {
   description = "Map of rotation_policy values across all key_vault_keys, keyed the same as var.key_vault_keys"
-  value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => v.rotation_policy if v.rotation_policy != null && length(v.rotation_policy) > 0 }
+  value       = { for k, v in azurerm_key_vault_key.key_vault_keys : k => one(v.rotation_policy) if v.rotation_policy != null && length(v.rotation_policy) > 0 }
 }
 output "key_vault_keys_tags" {
   description = "Map of tags values across all key_vault_keys, keyed the same as var.key_vault_keys"
